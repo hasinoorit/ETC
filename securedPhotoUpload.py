@@ -8,18 +8,22 @@ import time
 class UploadPhoto(APIView):
 
     # Only post method are allowed to upload file
+    # testing marge
     def post(self, request, format='jpg'):
         # Checking request for file
         if not request.FILES.get('photoFile'):
             return Response({"error": "No file selected"}, status=HTTP_400_BAD_REQUEST)
+
         myfile = request.FILES['photoFile']
         # checking file size Here file size allowed upto 256kb
         if myfile.size > (1024*256):
             return Response({"error": "File size should not be more than 256 kb"}, status=HTTP_400_BAD_REQUEST)
+
         # Checking valid image file
         fileType = imghdr.what(myfile)
         if not fileType:
             return Response({"error": "Invalid Image"}, status=HTTP_400_BAD_REQUEST)
+            
         # FileSystemStorage() is using to get media directory
         fs = FileSystemStorage()
         # using unix timestamp to make file name unique
