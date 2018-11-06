@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transection Diary</title>
+</head>
+<body>
+{% if added %}
+<h2>Record Added</h2>
+{% endif %}
+<table border="1px">
+    <tr>
+        <td>ID</td>
+        <td>Purpose</td>
+        <td>Type</td>
+        <td>Amount</td>
+        <td>Balance</td>
+        <td>Created</td>
+    </tr>
+    {% for cost in costs %}
+        <tr>
+            <td>{{ cost.id }}</td>
+            <td>{{ cost.purpose }}</td>
+            <td>{{ cost.cost_type }}</td>
+            <td>{{ cost.amount }}</td>
+            <td>{{ cost.balance }}</td>
+            <td>{{ cost.created }}</td>
+        </tr>
+    {% endfor %}
+</table>
+<br>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Add</button>
+</form>
+</body>
+</html>
